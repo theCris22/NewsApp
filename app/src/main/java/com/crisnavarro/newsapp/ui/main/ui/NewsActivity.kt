@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.ui.activity
+package com.crisnavarro.newsapp.ui.main.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

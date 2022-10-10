@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.ui.fragments
+package com.crisnavarro.newsapp.ui.searchnews.fragments
 
 import androidx.fragment.app.Fragment
 import com.crisnavarro.newsapp.R

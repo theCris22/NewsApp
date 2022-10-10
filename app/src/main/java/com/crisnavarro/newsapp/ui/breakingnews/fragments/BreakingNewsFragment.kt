@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.ui.fragments
+package com.crisnavarro.newsapp.ui.breakingnews.fragments
 
 import android.os.Bundle
 import android.view.View
