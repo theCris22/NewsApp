@@ -1,6 +1,5 @@
-package com.crisnavarro.newsapp.data
+package com.crisnavarro.newsapp.data.network
 
-import com.crisnavarro.newsapp.core.Constants
 import com.crisnavarro.newsapp.core.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

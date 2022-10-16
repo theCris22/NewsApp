@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.db;
+package com.crisnavarro.newsapp.data.db.dao;
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao;
@@ -15,9 +15,9 @@ interface ArticleDao {
     suspend fun upsert(article: Article): Long
 
     @Query("SELECT * FROM articles")
-    fun getAllArticles(): LiveData<List<Article>>
+    fun getAllNews(): LiveData<List<Article>>
 
     @Delete
-    suspend fun deleteArticle(article: Article)
+    suspend fun deleteNew(article: Article)
 
 }

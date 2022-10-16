@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.data
+package com.crisnavarro.newsapp.data.network
 
 import com.crisnavarro.newsapp.core.Constants.API_KEY
 import okhttp3.Interceptor
