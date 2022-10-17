@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.crisnavarro.newsapp.R
 import com.crisnavarro.newsapp.databinding.ActivityNewsBinding
 
-class NewsActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewsBinding
 

@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.ui.breakingnews.fragments
+package com.crisnavarro.newsapp.ui.news.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +13,11 @@ import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentBreakingNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
-import com.crisnavarro.newsapp.ui.breakingnews.viewmodel.BreakingNewsViewModel
+import com.crisnavarro.newsapp.ui.news.viewmodel.NewsViewModel
 
-class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
+class NewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
-    private val viewModel: BreakingNewsViewModel by viewModels()
+    private val viewModel: NewsViewModel by viewModels()
     private lateinit var binding: FragmentBreakingNewsBinding
     private lateinit var newsAdapter: NewsAdapter
 

@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.ui.breakingnews.viewmodel
+package com.crisnavarro.newsapp.ui.news.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.crisnavarro.newsapp.data.NewsRepository
 import com.crisnavarro.newsapp.data.responses.BreakingNewsResponse
 import kotlinx.coroutines.launch
 
-class BreakingNewsViewModel : ViewModel() {
+class NewsViewModel : ViewModel() {
 
     private val _news: MutableLiveData<BreakingNewsResponse> = MutableLiveData()
     val news: LiveData<BreakingNewsResponse> get() = _news

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/breakingNewsFragment"
-        android:name="com.crisnavarro.newsapp.ui.breakingnews.fragments.BreakingNewsFragment"
+        android:name="com.crisnavarro.newsapp.ui.news.fragments.NewsFragment"
         android:label="Breaking News">
         <action
             android:id="@+id/action_breakingNewsFragment_to_articleFragment"
