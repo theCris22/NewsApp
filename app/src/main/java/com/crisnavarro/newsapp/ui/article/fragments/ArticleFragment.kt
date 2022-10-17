@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.crisnavarro.newsapp.R
+import com.crisnavarro.newsapp.core.hide
 import com.crisnavarro.newsapp.core.shortSnackBar
+import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentArticleBinding
 import com.crisnavarro.newsapp.ui.article.viewmodel.ArticleViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ArticleFragment : Fragment(R.layout.fragment_article) {
 
@@ -55,11 +58,13 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     override fun onStart() {
         super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view).hide()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view).show()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 

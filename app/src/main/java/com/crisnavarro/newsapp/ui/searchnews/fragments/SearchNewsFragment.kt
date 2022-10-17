@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.crisnavarro.newsapp.R
+import com.crisnavarro.newsapp.core.hide
 import com.crisnavarro.newsapp.core.hideKeyboard
+import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.core.showKeyboard
 import com.crisnavarro.newsapp.data.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentSearchNewsBinding
@@ -42,6 +44,12 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     private fun initObservers() {
         viewModel.searchResult.observe(viewLifecycleOwner) {
             newsAdapter.submitList(it.articles)
+        }
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it)
+                binding.loading.show()
+            else
+                binding.loading.hide()
         }
     }
 

@@ -1,7 +1,6 @@
 package com.crisnavarro.newsapp.ui.breakingnews.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.crisnavarro.newsapp.R
+import com.crisnavarro.newsapp.core.hide
+import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentBreakingNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
@@ -37,6 +38,12 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     private fun initObserves() {
         viewModel.news.observe(viewLifecycleOwner) {
             newsAdapter.submitList(it.articles)
+        }
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if (it)
+                binding.loading.show()
+            else
+                binding.loading.hide()
         }
     }
 

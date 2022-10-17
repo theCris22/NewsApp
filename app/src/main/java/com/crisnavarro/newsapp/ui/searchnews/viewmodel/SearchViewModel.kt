@@ -10,15 +10,20 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
 
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> get() = _loading
+
     private var _searchResult: MutableLiveData<BreakingNewsResponse> = MutableLiveData()
     val searchResult: LiveData<BreakingNewsResponse> get() = _searchResult
 
     fun searchNews(query: String) = viewModelScope.launch {
-        val call = NewsRepository().searchNews(query)
+        _loading.postValue(true)
 
+        val call = NewsRepository().searchNews(query)
         if (call.isSuccessful)
             call.body().let { _searchResult.postValue(it) }
 
+        _loading.postValue(false)
     }
 
 }

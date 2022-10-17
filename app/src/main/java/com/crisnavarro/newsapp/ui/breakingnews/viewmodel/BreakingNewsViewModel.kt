@@ -13,16 +13,21 @@ class BreakingNewsViewModel : ViewModel() {
     private val _news: MutableLiveData<BreakingNewsResponse> = MutableLiveData()
     val news: LiveData<BreakingNewsResponse> get() = _news
 
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> get() = _loading
+
     init {
         getBreakingNews()
     }
 
     private fun getBreakingNews() = viewModelScope.launch {
-        val call = NewsRepository().getBreakingNews()
+        _loading.postValue(true)
 
+        val call = NewsRepository().getBreakingNews()
         if (call.isSuccessful)
             call.body()?.let { _news.postValue(it) }
 
+        _loading.postValue(false)
     }
 
 }
