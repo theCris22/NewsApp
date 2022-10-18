@@ -1,7 +1,7 @@
 package com.crisnavarro.newsapp.data.network
 
 import com.crisnavarro.newsapp.core.Constants
-import com.crisnavarro.newsapp.data.responses.BreakingNewsResponse
+import com.crisnavarro.newsapp.data.network.responses.BreakingNewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

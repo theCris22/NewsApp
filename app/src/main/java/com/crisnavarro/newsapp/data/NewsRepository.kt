@@ -1,26 +1,29 @@
 package com.crisnavarro.newsapp.data
 
-import android.content.Context
 import androidx.lifecycle.LiveData
-import com.crisnavarro.newsapp.data.models.Article
-import com.crisnavarro.newsapp.data.network.RetrofitInstance.api
-import com.crisnavarro.newsapp.data.db.ArticleDataBase
+import com.crisnavarro.newsapp.data.db.dao.ArticleDao
+import com.crisnavarro.newsapp.data.network.NewsApiClient
+import com.crisnavarro.newsapp.data.network.models.Article
+import javax.inject.Inject
 
-class NewsRepository {
+class NewsRepository @Inject constructor(
+    private val api: NewsApiClient,
+    private val articleDao: ArticleDao
+) {
 
-    suspend fun getBreakingNews() = api.getBreakingNews()
-    suspend fun searchNews(query: String) = api.searchNews(query)
+    suspend fun getBreakingNewsFromApi() = api.getBreakingNews()
+    suspend fun searchNewsToApi(query: String) = api.searchNews(query)
 
-    suspend fun savedNews(context: Context, article: Article) {
-        ArticleDataBase.getDatabase(context).getArticleDao().upsert(article)
+    suspend fun savedNewToDb(article: Article) {
+        articleDao.upsert(article)
     }
 
-    fun getSavedNews (context: Context): LiveData<List<Article>> {
-        return ArticleDataBase.getDatabase(context).getArticleDao().getAllNews()
+    fun getSavedNewsFromDb(): LiveData<List<Article>> {
+        return articleDao.getAllNews()
     }
 
-    suspend fun deleteNew (context: Context, article: Article) {
-        ArticleDataBase.getDatabase(context).getArticleDao().deleteNew(article)
+    suspend fun deleteNewFromDb(article: Article) {
+        articleDao.deleteNew(article)
     }
 
 }

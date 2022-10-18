@@ -5,10 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crisnavarro.newsapp.data.NewsRepository
-import com.crisnavarro.newsapp.data.responses.BreakingNewsResponse
+import com.crisnavarro.newsapp.data.network.responses.BreakingNewsResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel : ViewModel() {
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val repository: NewsRepository
+) : ViewModel() {
+
 
     private val _news: MutableLiveData<BreakingNewsResponse> = MutableLiveData()
     val news: LiveData<BreakingNewsResponse> get() = _news
@@ -23,9 +29,9 @@ class NewsViewModel : ViewModel() {
     private fun getBreakingNews() = viewModelScope.launch {
         _loading.postValue(true)
 
-        val call = NewsRepository().getBreakingNews()
+        val call = repository.getBreakingNewsFromApi()
         if (call.isSuccessful)
-            call.body()?.let { _news.postValue(it) }
+            call.body()?.let { it -> _news.postValue(it) }
 
         _loading.postValue(false)
     }

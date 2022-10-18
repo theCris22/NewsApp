@@ -1,7 +1,7 @@
 package com.crisnavarro.newsapp.data.db.converters
 
 import androidx.room.TypeConverter
-import com.crisnavarro.newsapp.data.models.Source
+import com.crisnavarro.newsapp.data.network.models.Source
 
 class Converters {
 

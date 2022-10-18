@@ -13,13 +13,14 @@ import com.crisnavarro.newsapp.R
 import com.crisnavarro.newsapp.core.hide
 import com.crisnavarro.newsapp.core.shortSnackBar
 import com.crisnavarro.newsapp.core.show
-import com.crisnavarro.newsapp.data.models.Article
+import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentArticleBinding
 import com.crisnavarro.newsapp.ui.article.viewmodel.ArticleViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArticleFragment : Fragment(R.layout.fragment_article) {
-
 
     private val viewModel: ArticleViewModel by viewModels()
     private val args: ArticleFragmentArgs by navArgs()
@@ -49,7 +50,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             }
 
             fabSave.setOnClickListener {
-                viewModel.saveArticle(requireContext(), article)
+                viewModel.saveArticle(article)
                 it.shortSnackBar(getString(R.string.article_added_successfully))
             }
         }

@@ -1,16 +1,20 @@
 package com.crisnavarro.newsapp.ui.article.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crisnavarro.newsapp.data.NewsRepository
-import com.crisnavarro.newsapp.data.models.Article
+import com.crisnavarro.newsapp.data.network.models.Article
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ArticleViewModel : ViewModel() {
+@HiltViewModel
+class ArticleViewModel @Inject constructor(
+    private val repository: NewsRepository
+) : ViewModel() {
 
-    fun saveArticle(context: Context, article: Article) = viewModelScope.launch {
-        NewsRepository().savedNews(context, article)
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        repository.savedNewToDb(article)
     }
 
 }

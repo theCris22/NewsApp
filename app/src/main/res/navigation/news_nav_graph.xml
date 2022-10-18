@@ -22,7 +22,7 @@
         android:label="ArticleFragment">
         <argument
             android:name="article"
-            app:argType="com.crisnavarro.newsapp.data.models.Article" />
+            app:argType="com.crisnavarro.newsapp.data.network.models.Article" />
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"
