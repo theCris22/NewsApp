@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.data.models
+package com.crisnavarro.newsapp.data.network.models
 
 data class Source(
     val id: Any? = null,

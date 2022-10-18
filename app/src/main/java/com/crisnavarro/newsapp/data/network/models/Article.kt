@@ -1,4 +1,4 @@
-package com.crisnavarro.newsapp.data.models
+package com.crisnavarro.newsapp.data.network.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

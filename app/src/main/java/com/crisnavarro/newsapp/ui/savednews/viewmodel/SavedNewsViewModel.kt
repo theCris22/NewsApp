@@ -1,18 +1,20 @@
 package com.crisnavarro.newsapp.ui.savednews.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crisnavarro.newsapp.data.NewsRepository
-import com.crisnavarro.newsapp.data.models.Article
+import com.crisnavarro.newsapp.data.network.models.Article
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SavedNewsViewModel : ViewModel() {
+@HiltViewModel
+class SavedNewsViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
 
-    fun getSavedNews(context: Context) = NewsRepository().getSavedNews(context)
+    fun getSavedNews() = repository.getSavedNewsFromDb()
 
-    fun deleteNew(context: Context, article: Article) = viewModelScope.launch {
-        NewsRepository().deleteNew(context, article)
+    fun deleteNew(article: Article) = viewModelScope.launch {
+        repository.deleteNewFromDb(article)
     }
 
 }

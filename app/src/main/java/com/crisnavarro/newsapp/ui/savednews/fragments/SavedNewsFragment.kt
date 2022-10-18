@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.crisnavarro.newsapp.R
-import com.crisnavarro.newsapp.data.models.Article
+import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentSavedNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
 import com.crisnavarro.newsapp.ui.savednews.viewmodel.SavedNewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
 
     private val viewModel: SavedNewsViewModel by viewModels()
@@ -72,12 +72,12 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
     }
 
     private fun initObserves() {
-        viewModel.getSavedNews(requireContext()).observe(viewLifecycleOwner) {
+        viewModel.getSavedNews().observe(viewLifecycleOwner) {
             Log.e("LIST ->", it.size.toString())
             newsAdapter.submitList(it)
         }
     }
 
-    private fun deleteNew(article: Article) = viewModel.deleteNew(requireContext(), article)
+    private fun deleteNew(article: Article) = viewModel.deleteNew(article)
 
 }

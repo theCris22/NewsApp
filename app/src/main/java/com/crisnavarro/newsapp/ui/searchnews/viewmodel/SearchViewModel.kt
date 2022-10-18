@@ -5,10 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crisnavarro.newsapp.data.NewsRepository
-import com.crisnavarro.newsapp.data.responses.BreakingNewsResponse
+import com.crisnavarro.newsapp.data.network.responses.BreakingNewsResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val repository: NewsRepository): ViewModel() {
 
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> get() = _loading
@@ -19,7 +22,7 @@ class SearchViewModel : ViewModel() {
     fun searchNews(query: String) = viewModelScope.launch {
         _loading.postValue(true)
 
-        val call = NewsRepository().searchNews(query)
+        val call = repository.searchNewsToApi(query)
         if (call.isSuccessful)
             call.body().let { _searchResult.postValue(it) }
 

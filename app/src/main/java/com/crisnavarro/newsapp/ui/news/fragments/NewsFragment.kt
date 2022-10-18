@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.crisnavarro.newsapp.R
 import com.crisnavarro.newsapp.core.hide
 import com.crisnavarro.newsapp.core.show
-import com.crisnavarro.newsapp.data.models.Article
+import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentBreakingNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
 import com.crisnavarro.newsapp.ui.news.viewmodel.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     private val viewModel: NewsViewModel by viewModels()
