@@ -26,7 +26,7 @@ class NewsViewModel @Inject constructor(
         getBreakingNews()
     }
 
-    private fun getBreakingNews() = viewModelScope.launch {
+    fun getBreakingNews() = viewModelScope.launch {
         _loading.postValue(true)
 
         val call = repository.getBreakingNewsFromApi()

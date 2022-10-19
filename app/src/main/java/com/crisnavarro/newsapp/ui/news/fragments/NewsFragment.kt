@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.crisnavarro.newsapp.R
-import com.crisnavarro.newsapp.core.hide
-import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentBreakingNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
@@ -42,10 +40,7 @@ class NewsFragment : Fragment(R.layout.fragment_breaking_news) {
             newsAdapter.submitList(it.articles)
         }
         viewModel.loading.observe(viewLifecycleOwner) {
-            if (it)
-                binding.loading.show()
-            else
-                binding.loading.hide()
+            binding.srlNews.isRefreshing = it
         }
     }
 
@@ -53,10 +48,14 @@ class NewsFragment : Fragment(R.layout.fragment_breaking_news) {
         newsAdapter = NewsAdapter { goToArticle(it) }
 
         with(binding) {
+
             rvNews.apply {
                 adapter = newsAdapter
                 setHasFixedSize(true)
             }
+
+            srlNews.setOnRefreshListener { viewModel.getBreakingNews() }
+
         }
     }
 
