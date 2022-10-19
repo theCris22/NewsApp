@@ -42,10 +42,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             newsAdapter.submitList(it.articles)
         }
         viewModel.loading.observe(viewLifecycleOwner) {
-            if (it)
-                binding.loading.show()
-            else
-                binding.loading.hide()
+            binding.srlNews.isRefreshing = it
         }
     }
 
@@ -68,6 +65,13 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             rvNews.apply {
                 adapter = newsAdapter
                 setHasFixedSize(true)
+            }
+
+            srlNews.setOnRefreshListener {
+                if (svNews.query.toString().isNotEmpty()) {
+                    viewModel.searchNews(svNews.query.toString() ?: "")
+                    svNews.clearFocus()
+                } else srlNews.isRefreshing = false
             }
 
         }
