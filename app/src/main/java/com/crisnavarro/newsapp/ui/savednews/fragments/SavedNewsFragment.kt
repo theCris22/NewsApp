@@ -1,13 +1,14 @@
 package com.crisnavarro.newsapp.ui.savednews.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.crisnavarro.newsapp.R
+import com.crisnavarro.newsapp.core.hide
+import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentSavedNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
@@ -44,6 +45,11 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
                 setHasFixedSize(true)
             }
 
+            srlNews.setOnRefreshListener {
+                viewModel.getSavedNews()
+                srlNews.isRefreshing = false
+            }
+
             /*val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP or ItemTouchHelper.DOWN,
                 ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -73,8 +79,21 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
 
     private fun initObserves() {
         viewModel.getSavedNews().observe(viewLifecycleOwner) {
-            Log.e("LIST ->", it.size.toString())
             newsAdapter.submitList(it)
+            validateList(it ?: listOf())
+        }
+    }
+
+    private fun validateList(list: List<Article>) {
+        with(binding) {
+            if (list.isNotEmpty()) {
+                rvNews.show()
+                lyEmpty.root.hide()
+            } else {
+                rvNews.hide()
+                lyEmpty.tvEmptyText.text = getString(R.string.app_not_saved_news_yet)
+                lyEmpty.root.show()
+            }
         }
     }
 

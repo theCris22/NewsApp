@@ -38,12 +38,27 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     }
 
     private fun initObservers() {
+
         viewModel.searchResult.observe(viewLifecycleOwner) {
-            newsAdapter.submitList(it.articles)
+            newsAdapter.submitList(it)
         }
+
         viewModel.loading.observe(viewLifecycleOwner) {
             binding.srlNews.isRefreshing = it
         }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            with(binding) {
+                if (error) {
+                    rvNews.hide()
+                    lyEmpty.root.show()
+                } else {
+                    rvNews.show()
+                    lyEmpty.root.hide()
+                }
+            }
+        }
+
     }
 
     private fun initViews() {
