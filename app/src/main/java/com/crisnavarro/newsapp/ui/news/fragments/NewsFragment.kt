@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.crisnavarro.newsapp.R
+import com.crisnavarro.newsapp.core.hide
+import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentBreakingNewsBinding
 import com.crisnavarro.newsapp.ui.adapters.NewsAdapter
@@ -36,12 +38,27 @@ class NewsFragment : Fragment(R.layout.fragment_breaking_news) {
     }
 
     private fun initObserves() {
+
         viewModel.news.observe(viewLifecycleOwner) {
-            newsAdapter.submitList(it.articles)
+            newsAdapter.submitList(it)
         }
+
         viewModel.loading.observe(viewLifecycleOwner) {
             binding.srlNews.isRefreshing = it
         }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            with(binding) {
+                if (error) {
+                    rvNews.hide()
+                    lyEmpty.root.show()
+                } else {
+                    rvNews.show()
+                    lyEmpty.root.hide()
+                }
+            }
+        }
+
     }
 
     private fun initViews() {

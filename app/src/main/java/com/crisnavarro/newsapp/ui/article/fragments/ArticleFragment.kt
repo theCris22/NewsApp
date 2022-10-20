@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -44,10 +46,8 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     private fun initViews(article: Article) {
         with(binding) {
 
-            wvArticle.apply {
-                webViewClient = WebViewClient()
-                loadUrl(article.url.toString())
-            }
+            wvArticle.webViewClient = WebClient()
+            wvArticle.loadUrl(article.url.toString())
 
             fabSave.setOnClickListener {
                 viewModel.saveArticle(article)
@@ -67,6 +67,23 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         super.onDestroy()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view).show()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    inner class WebClient : WebViewClient() {
+
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
+            view?.loadUrl(request?.url.toString())
+            return false
+        }
+
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+            binding.pbLoading.hide()
+        }
+
     }
 
 }

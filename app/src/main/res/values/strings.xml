@@ -1,7 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">NewsApp</string>
     <string name="app_tittle_breaking_news">Breaking News</string>
     <string name="app_tittle_saved_news">Saved News</string>
     <string name="app_tittle_search_news">Search News</string>
     <string name="article_added_successfully">article added successfully</string>
+    <string name="app_empty_result_icon">app empty result icon</string>
+    <string name="app_not_results_found">Not Results found</string>
+    <string name="app_not_saved_news_yet">There are not news saved yet</string>
+    <string name="app_fab_save_article" tools:ignore="ExtraTranslation">Fab Save article</string>
 </resources>
