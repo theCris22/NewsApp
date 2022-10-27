@@ -1,5 +1,6 @@
 package com.crisnavarro.newsapp.ui.news.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,27 +31,20 @@ class NewsViewModel @Inject constructor(
     }
 
     fun getBreakingNews() = viewModelScope.launch {
+
         _loading.postValue(true)
 
         val call = repository.getBreakingNewsFromApi()
-
-        when {
-            call.isSuccessful -> {
-
+        when (call.second) {
+            "SUCCESS" -> {
                 _error.postValue(false)
-
-                call.body()?.let {
-                    if (it.articles.any())
-                        _news.postValue(call.body()?.articles ?: listOf())
-                    else
-                        _error.postValue(true)
-
-                }
+                _news.postValue(call.first!!)
             }
-
-            !call.isSuccessful -> {
+            else -> {
                 _error.postValue(true)
+                Log.e("ERROR ->", call.second)
             }
+
         }
 
         _loading.postValue(false)

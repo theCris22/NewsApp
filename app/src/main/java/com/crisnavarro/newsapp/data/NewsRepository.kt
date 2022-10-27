@@ -11,8 +11,22 @@ class NewsRepository @Inject constructor(
     private val articleDao: ArticleDao
 ) {
 
-    suspend fun getBreakingNewsFromApi() = api.getBreakingNews()
-    suspend fun searchNewsToApi(query: String) = api.searchNews(query)
+    suspend fun getBreakingNewsFromApi(): Pair<List<Article>?, String> {
+        val response = api.getBreakingNews()
+
+        return if (response.isSuccessful && response.body() != null && response.body()?.articles?.any() == true)
+            Pair(response.body()!!.articles, "SUCCESS")
+        else Pair(null, response.toString())
+
+    }
+
+    suspend fun searchNewsToApi(query: String): Pair<List<Article>?, String> {
+        val response = api.searchNews(query)
+
+        return if (response.isSuccessful && response.body() != null && response.body()?.articles?.any() == true)
+            Pair(response.body()!!.articles, "SUCCESS")
+        else Pair(null, response.toString())
+    }
 
     suspend fun savedNewToDb(article: Article) {
         articleDao.upsert(article)
