@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.crisnavarro.newsapp.R
 import com.crisnavarro.newsapp.core.hide
+import com.crisnavarro.newsapp.core.shortSnackBar
 import com.crisnavarro.newsapp.core.show
 import com.crisnavarro.newsapp.data.network.models.Article
 import com.crisnavarro.newsapp.databinding.FragmentSavedNewsBinding
@@ -50,7 +53,7 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
                 srlNews.isRefreshing = false
             }
 
-            /*val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP or ItemTouchHelper.DOWN,
                 ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
             ) {
@@ -66,12 +69,13 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
                     val position = viewHolder.adapterPosition
                     val article = newsAdapter.currentList[position]
                     deleteNew(article)
+                    view?.shortSnackBar(getString(R.string.article_deleted_successfully))
                 }
             }
 
             ItemTouchHelper(itemTouchHelperCallback).apply {
                 attachToRecyclerView(rvNews)
-            }*/
+            }
 
         }
 

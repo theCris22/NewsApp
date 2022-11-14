@@ -6,7 +6,6 @@ import androidx.room.TypeConverters
 import com.crisnavarro.newsapp.data.db.converters.Converters
 import com.crisnavarro.newsapp.data.db.dao.ArticleDao
 import com.crisnavarro.newsapp.data.network.models.Article
-import dagger.Provides
 
 @Database(
     entities = [Article::class],

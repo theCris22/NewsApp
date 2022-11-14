@@ -8,4 +8,5 @@
     <string name="app_not_results_found">Not Results found</string>
     <string name="app_not_saved_news_yet">There are not news saved yet</string>
     <string name="app_fab_save_article" tools:ignore="ExtraTranslation">Fab Save article</string>
+    <string name="article_deleted_successfully">Article deleted</string>
 </resources>
